@@ -39,7 +39,7 @@
 
     <div class="app-data">
         <form class="app-data__form" @submit.prevent="addItem">
-        <label for="name" class="form__label">LABEL:</label>
+        <label for="name" class="form__label">ITEM:</label>
         <input
           class="form__input"
           type="text"

@@ -1,7 +1,3 @@
-input[type=number]::-webkit-inner-spin-button {
-    display: none;
-}
-
 .app {
     font-family: "Avenir", Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -171,4 +167,8 @@ input[type=number]::-webkit-inner-spin-button {
     text-align: center;
     font-weight: bold;
     font-size: .9rem;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    display: none;
 }
