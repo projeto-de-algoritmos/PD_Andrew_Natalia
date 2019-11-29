@@ -1,65 +1,101 @@
 <template>
-  <div id="app">
-    <h1>knapsack</h1>
-    <form @submit.prevent="addItem">
-      <input
-        type="text"
-        v-model="item.name"
-      >
-      <input
-        type="number"
-        v-model="item.weight"
-      >
-      <input
-        type="number"
-        v-model="item.value"
-      >
-      <input
-        type="submit"
-        value="Adicionar"
-      >
-    </form>
-    <input
-      type="number"
-      v-model="maxWeight"
-    >
-    <ul>
-      <li
-        v-for="i in items"
-        :key="i.id"
-      >
-        item:{{i.name}} | w:{{i.weight}} | v:{{i.value}} | <button @click="removeItem(i)">X</button>
-      </li>
-    </ul>
+  <div class="app" id="app">
+    <h1 class="app-title">KANPSACK</h1>
     
-    <div>
-      <h1>Levar</h1>
-        <h3
-          v-for="item in knapsack.items"
-          :key="item"
-        >{{item.name}} w:{{item.weight}} v:{{item.value}}</h3>
-        <h2>Total {{knapsack.total}}</h2>
-    </div>
-    <div>
-      <table>
-        <tr>
-          <th></th>
+    <div class="app-matrix">
+      <table class="app-matrix__table">
+        <tr class="table-header">
+          <th class="table__cell table__cell--hidden"></th>
           <th
+            class="table__cell table__cell--highlighted"
             v-for="w in knapsack.matrix[0].length"
             :key="w"
           >{{w}}</th>
         </tr>
         <tr
+          class="table-content"
           v-for="(row, index) in knapsack.matrix"
           :key="row"
         >
-          <td><b>{{index}}</b></td>
+          <td class="table__cell table__cell--highlighted"><b>{{index}}</b></td>
           <td
+            class="table__cell"
             v-for="i in row"
             :key="i"
           >{{i}}</td>
         </tr>
       </table>
+    </div>
+
+    <div class="app-weight">
+      <label for="max-weight" class="app-weight__label">PESO MÁXIMO: </label>
+      <input
+        class="app-weight__input"
+        type="number"
+        id="max-weight"
+        v-model="maxWeight"
+      >
+    </div>
+
+    <div class="app-data">
+        <form class="app-data__form" @submit.prevent="addItem">
+        <label for="name" class="form__label">LABEL:</label>
+        <input
+          class="form__input"
+          type="text"
+          id="name"
+          v-model="item.name"
+        >
+        <label for="weight" class="form__label">PESO:</label>
+        <input
+          class="form__input"
+          type="number"
+          id="weight"
+          v-model="item.weight"
+        >
+        <label for="value" class="form__label">VALOR:</label>
+        <input
+          class="form__input"
+          type="number"
+          id="value"
+          v-model="item.value"
+        >
+        <input
+          class="form__submit"
+          type="submit"
+          value="ADICIONAR"
+        >
+      </form>
+      <table class="app-data__table">
+        <tr>
+          <th class="data-table__cell">ITEM</th>
+          <th class="data-table__cell">PESO</th>
+          <th class="data-table__cell">VALOR</th>
+          <th class="data-table__cell"></th>
+        </tr>
+        <tr 
+          v-for="i in items"
+          :key="i.id"
+        >
+          <td class="data-table__cell">{{i.name}}</td>
+          <td class="data-table__cell">{{i.weight}}</td>
+          <td class="data-table__cell">{{i.value}}</td>
+          <td class="data-table__cell"><button class="data-table__button" @click="removeItem(i)">X</button></td>
+        </tr>
+      </table>
+      <div class="data-result">
+        <h2 class="data-result__title">LEVAR</h2>
+        <ul class="data-result__list">
+          <li
+            class="data-result__item"
+            v-for="item in knapsack.items"
+            :key="item"
+          >
+            item: {{item.name}}, peso: {{item.weight}}, valor: {{item.value}}
+          </li>
+        </ul>
+        <p class="data-result__total">VALOR TOTAL: {{knapsack.total}}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -174,13 +210,6 @@ export default {
 };
 </script>
 
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="css">
+  @import 'app.css';
 </style>
